@@ -15,7 +15,7 @@ Edit or create a new CMS page or static block to see the
 enhancements.
 
 ##Screenshots
-[Rich-text HTML editing](http://blog.rickbuczynski.com/wp-content/uploads/2014/11/rootd-tinymce-fig1.png)
+![Rich-text HTML editing](http://blog.rickbuczynski.com/wp-content/uploads/2014/11/rootd-tinymce-fig1.png)
 
-[Enhancement customizations](http://blog.rickbuczynski.com/wp-content/uploads/2014/11/rootd-tinymce-fig2.png)
+![Enhancement customizations](http://blog.rickbuczynski.com/wp-content/uploads/2014/11/rootd-tinymce-fig2.png)
 
