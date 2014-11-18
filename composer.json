@@ -1,0 +1,8 @@
+{
+	"name": "vbuck/rootd-tinymce",
+	"type": "magento-module",
+	"description": "Adds enhancement to TinyMCE for Magento 1.x.",
+	"require": {
+		"magento-hackathon/magento-composer-installer": "*"
+	}
+}
