@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!--
+
+/**
+ * eTinyMCE integration module.
+ *
+ * @package   Rootd_Tinymce
+ * @author    Rick Buczynski <me@rickbuczynski.com>
+ * @copyright 2014 Rick Buczynski. All Rights Reserved.
+ * @version   0.0.1
+ */
+
+-->
+<config>
+    <modules>
+        <Rootd_Tinymce>
+            <version>0.0.1</version>
+        </Rootd_Tinymce>
+    </modules>
+    <default>
+        <tinymce>
+            <general>
+                <loader_js><![CDATA[rootd/tinymce/mage-tinymce.js]]></loader_js>
+                <use_store_css>1</use_store_css>
+                <custom_css></custom_css>
+            </general>
+            <codemirror>
+                <base_css><![CDATA[rootd/tinymce/codemirror/lib/codemirror.css]]></base_css>
+                <base_js><![CDATA[rootd/tinymce/codemirror/lib/codemirror.js]]></base_js>
+                <mode_js><![CDATA[rootd/tinymce/codemirror/mode/xml/xml.js]]></mode_js>
+                <plugins><![CDATA[rootd/tinymce/codemirror/lib/util/formatting.js]]></plugins>
+                <loader_js><![CDATA[rootd/tinymce/codemirror/mage-codemirror.js]]></loader_js>
+            </codemirror>
+        </tinymce>
+    </default>
+    <global>
+        <helpers>
+            <tinymce>
+                <class>Rootd_Tinymce_Helper</class>
+            </tinymce>
+        </helpers>
+        <blocks>
+            <tinymce>
+                <class>Rootd_Tinymce_Block</class>
+            </tinymce>
+        </blocks>
+        <models>
+            <tinymce>
+                <class>Rootd_Tinymce_Model</class>
+            </tinymce>
+        </models>
+    </global>
+    <adminhtml>
+        <layout>
+            <updates>
+                <tinymce>
+                    <file>tinymce.xml</file>
+                </tinymce>
+            </updates>
+        </layout>
+    </adminhtml>
+</config>

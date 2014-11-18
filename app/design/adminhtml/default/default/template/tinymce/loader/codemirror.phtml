@@ -1,0 +1,11 @@
+<?php /* @var $this Rootd_Tinymce_Block_Loader_Codemirror */ ?>
+<link rel="stylesheet" href="<?php echo $this->htmlEscape($this->getBaseCssUrl()); ?>" />
+<script type="text/javascript" src="<?php echo $this->htmlEscape($this->getBaseJsUrl()); ?>"></script>
+<script type="text/javascript" src="<?php echo $this->htmlEscape($this->getModeJsUrl()); ?>"></script>
+<?php echo $this->getPluginJsHtml(); ?>
+<script type="text/javascript" src="<?php echo $this->htmlEscape($this->getLoaderJsUrl()); ?>"></script>
+<script type="text/javascript">
+    $(document).observe('dom:loaded', function() {
+        attachCodeMirrorTo('<?php echo $this->htmlEscape($this->getTarget()); ?>', '<?php echo $this->htmlEscape($this->getTrigger()); ?>')
+    });
+</script>

@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!--
+
+/**
+ * eTinyMCE ACL configuration.
+ *
+ * @package   Rootd_Tinymce
+ * @author    Rick Buczynski <me@rickbuczynski.com>
+ * @copyright 2014 Rick Buczynski. All Rights Reserved.
+ */
+
+-->
+<config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <tinymce translate="title" module="tinymce">
+                                        <title>Enhanced TinyMCE Settings</title>
+                                        <sort_order>85</sort_order>
+                                    </tinymce>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>
