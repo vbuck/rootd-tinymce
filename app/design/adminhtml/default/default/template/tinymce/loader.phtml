@@ -1,0 +1,9 @@
+<?php /* @var $this Rootd_Tinymce_Block_Loader */ ?>
+<script type="text/javascript" src="<?php echo $this->htmlEscape($this->getLoaderJsUrl()); ?>"></script>
+<script type="text/javascript">
+    var eTinyMce = new RootdTinyMceExtension({
+        custom_css          : '<?php echo $this->getCustomCssUrl(); ?>', 
+        store_loader_url    : '<?php echo $this->getStoreLoaderUrl(); ?>',
+        store_loader_parent : '<?php echo $this->getStoreLoaderParent(); ?>',
+    });
+</script>
