@@ -1,6 +1,6 @@
 app/code/community/Rootd/Tinymce                                app/code/community/Rootd/Tinymce
 app/design/adminhtml/default/default/layout/tinymce.xml         app/design/adminhtml/default/default/layout/tinymce.xml
-app/design/adminhtml/default/default/template/rootd/tinymce     app/design/adminhtml/default/default/template/rootd/tinymce
+app/design/adminhtml/default/default/template/tinymce     	app/design/adminhtml/default/default/template/tinymce
 js/rootd/tinymce                                                js/rootd/tinymce
 app/etc/modules/Rootd_Tinymce.xml                               app/etc/modules/Rootd_Tinymce.xml
 
