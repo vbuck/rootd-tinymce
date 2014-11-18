@@ -12,7 +12,7 @@ class Rootd_Tinymce_Model_System_Config_Source_Codemirror_Mode
 {
 
     private $_modes = array();
-    private $_path  = 'Rootd/tinymce/codemirror/mode';
+    private $_path  = 'rootd/tinymce/codemirror/mode';
 
     /**
      * Load the available syntax modes from storage.
