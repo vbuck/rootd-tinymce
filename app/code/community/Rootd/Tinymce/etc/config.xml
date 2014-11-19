@@ -50,6 +50,17 @@
             </tinymce>
         </models>
     </global>
+    <admin>
+        <routers>
+            <rootd>
+                <use>admin</use>
+                <args>
+                    <module>Rootd_Tinymce</module>
+                    <frontName>rootd</frontName>
+                </args>
+            </rootd>
+        </routers>
+    </admin>
     <adminhtml>
         <layout>
             <updates>
