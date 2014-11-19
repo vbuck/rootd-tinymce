@@ -12,8 +12,14 @@ class Rootd_Tinymce_Adminhtml_BackendController
     extends Mage_Adminhtml_Controller_Action
 {
 
+    // temporary
     protected $_publicActions = array('loadstoreassets');
 
+    /**
+     * Load store assets for applying to TinyMCE instance.
+     * 
+     * @return void
+     */
     public function loadstoreassetsAction()
     {
         $output = '';
@@ -22,16 +28,19 @@ class Rootd_Tinymce_Adminhtml_BackendController
             $emulator           = Mage::getSingleton('core/app_emulation');
             $initialEnvironment = $emulator->startEnvironmentEmulation($storeId);
 
-            // Simpler to render and parse the head than to re-write that block
-            $headBlock = Mage::app()->getLayout()
-                ->createBlock('page/html_head');
+            $this->loadLayout();
 
-            $output = $headBlock->getCssJsHtml();
+            // Simpler to render and parse the head than to re-write that block
+            $output = $this->getLayout()
+                ->getBlock('head')
+                ->getCssJsHtml();
 
             $emulator->stopEnvironmentEmulation($initialEnvironment);
         }
 
-        return $output;
+        $this->getResponse()
+            ->setBody($output)
+            ->sendResponse();
     }
 
 }
