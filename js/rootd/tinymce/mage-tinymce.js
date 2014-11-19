@@ -129,7 +129,7 @@ RootdTinyMceExtension.prototype = {
                     ed.onSaveContent.add(function(ed, o) {
                         varienGlobalEvents.fireEvent('tinymceSaveContent', o);
 
-                        instance.removeStoreLoader();
+                        instance.removeStoreLoader(ed);
                     });
 
                     ed.onChange.add(function(ed, l) {
@@ -222,12 +222,14 @@ RootdTinyMceExtension.prototype = {
 
     /**
      * Remove the store loader menu.
-     *
-     * @todo Implement
      * 
      * @return RootdTinyMceExtension
      */
-    removeStoreLoader: function() {
+    removeStoreLoader: function(editor) {
+        $(this._storeLoader).remove();
+
+        this._storeLoader = null;
+
         return this;
     },
 
