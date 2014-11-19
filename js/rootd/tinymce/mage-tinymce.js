@@ -12,6 +12,7 @@ var RootdTinyMceExtension = Class.create();
 
 RootdTinyMceExtension.prototype = {
 
+    _key            : 0,
     _options        : {
         custom_css          : '',
         store_loader_url    : '',
@@ -65,14 +66,19 @@ RootdTinyMceExtension.prototype = {
     clearCss: function(editor, uri, tag) {
         var head    = editor.dom.getRoot().parentNode.getElementsByTagName('head')[0],
             css     = head.getElementsByTagName('link'),
+            queue   = [],
             element = null;
 
         for (var i = 0; i < css.length; i++) {
             element = css[i];
 
             if (element.href == uri || element.href.indexOf(tag) > -1) {
-                head.removeChild(element);
+                queue.push(element);
             }
+        }
+
+        while (queue.length) {
+            head.removeChild(queue.pop());
         }
 
         return this;
@@ -222,6 +228,8 @@ RootdTinyMceExtension.prototype = {
 
     /**
      * Remove the store loader menu.
+     *
+     * @todo Implement
      * 
      * @return RootdTinyMceExtension
      */
@@ -264,6 +272,10 @@ RootdTinyMceExtension.prototype = {
         } else {
             tag = '?' + tag;
         }
+
+        tag += '&key=' + this._key.toString();
+
+        this._key++;
 
         return css + tag;
     }
