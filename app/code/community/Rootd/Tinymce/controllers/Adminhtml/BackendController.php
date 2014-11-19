@@ -12,9 +12,6 @@ class Rootd_Tinymce_Adminhtml_BackendController
     extends Mage_Adminhtml_Controller_Action
 {
 
-    // temporary
-    protected $_publicActions = array('loadstoreassets');
-
     /**
      * Load store assets for applying to TinyMCE instance.
      * 

@@ -14,7 +14,7 @@
     <!-- Generic handle for loading eTinyMCE -->
     <enhanced_tinymce>
         <reference name="before_body_end">
-            <block type="tinymce/loader" name="tinymce.loader" as="loader">
+            <block type="tinymce/loader" name="tinymce.loader" as="tinymce_loader">
                 <action method="setTemplate" ifconfig="tinymce/general/enabled">
                     <template><![CDATA[tinymce/loader.phtml]]></template>
                 </action>

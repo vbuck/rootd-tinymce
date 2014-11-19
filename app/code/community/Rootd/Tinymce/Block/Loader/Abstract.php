@@ -21,7 +21,7 @@ class Rootd_Tinymce_Block_Loader_Abstract
      */
     public function getConfigUrl($configPath = '')
     {
-        return $this->getUrl(Mage::getStoreConfig($configPath));
+        return $this->resolveUrl(Mage::getStoreConfig($configPath));
     }
 
     /**
@@ -55,7 +55,7 @@ class Rootd_Tinymce_Block_Loader_Abstract
      * 
      * @return string
      */
-    public function getUrl($path)
+    public function resolveUrl($path)
     {
         if (!$path) {
             return '';

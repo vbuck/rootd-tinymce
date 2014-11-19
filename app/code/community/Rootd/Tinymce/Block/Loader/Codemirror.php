@@ -58,7 +58,7 @@ class Rootd_Tinymce_Block_Loader_Codemirror
      */
     public function addPlugin($path)
     {
-        $this->_plugins[] = $this->getUrl($path);
+        $this->_plugins[] = $this->resolveUrl($path);
 
         return $this;
     }

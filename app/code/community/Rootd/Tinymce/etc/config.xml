@@ -52,13 +52,13 @@
     </global>
     <admin>
         <routers>
-            <rootd>
+            <tinymce>
                 <use>admin</use>
                 <args>
                     <module>Rootd_Tinymce</module>
-                    <frontName>rootd</frontName>
+                    <frontName>tinymce</frontName>
                 </args>
-            </rootd>
+            </tinymce>
         </routers>
     </admin>
     <adminhtml>

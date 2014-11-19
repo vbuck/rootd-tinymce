@@ -25,10 +25,7 @@ RootdTinyMceExtension.prototype = {
      *
      * @return RootdTinyMceExtension
      */
-    addStoreLoader: function() {
-        /* @todo Finish store loader implementation */
-        return this;
-
+    addStoreLoader: function(editor) {
         var instance = this;
 
         if (!this._storeLoader && this.get('store_loader_parent')) {
@@ -36,22 +33,60 @@ RootdTinyMceExtension.prototype = {
             
             var stores = this.get('store_config');
 
-            for (var id in stores) {
-                var option      = document.createElement('option');
-                option.value    = id;
-                option.text     = stores[id];
+            for (var i = 0; i < stores.length; i++) {
+                var store       = stores[i],
+                    option      = document.createElement('option');
+
+                option.value    = store.id;
+                option.text     = store.name;
 
                 this._storeLoader.appendChild(option);
             }
 
             $(this._storeLoader).observe('change', function() {
-                instance.loadStoreCss($F(this));
+                instance.loadStoreCss($F(this), editor);
             });
 
             $(this.get('store_loader_parent')).appendChild(this._storeLoader);
         }
 
         return this;
+    },
+
+    /**
+     * Remove the specified CSS from the editor instance.
+     * 
+     * @param object editor The TinyMCE editor instance.
+     * @param string uri    The URI of the asset to remove.
+     * @param string tag    A ID tag by which to remove assets.
+     * 
+     * @return RootdTinyMceExtension
+     */
+    clearCss: function(editor, uri, tag) {
+        var head    = editor.dom.getRoot().parentNode.getElementsByTagName('head')[0],
+            css     = head.getElementsByTagName('link'),
+            element = null;
+
+        for (var i = 0; i < css.length; i++) {
+            element = css[i];
+
+            if (element.href == uri || element.href.indexOf(tag) > -1) {
+                head.removeChild(element);
+            }
+        }
+
+        return this;
+    },
+
+    /**
+     * Remove all store-based CSS from the editor instance.
+     * 
+     * @param object editor The TinyMCE editor instance.
+     * 
+     * @return RootdTinyMceExtension
+     */
+    clearStoreCss: function(editor) {
+        return this.clearCss(editor, null, 'enhanced_tinymce_store_css');
     },
 
     /**
@@ -111,7 +146,7 @@ RootdTinyMceExtension.prototype = {
                             ed.dom.loadCSS(instance.tagCss(css));
                         }
 
-                        instance.addStoreLoader();
+                        instance.addStoreLoader(ed);
                     });
                 }
 
@@ -148,22 +183,41 @@ RootdTinyMceExtension.prototype = {
         this._options = Object.extend(this._options, options || {});
 
         this.extendSetup();
-        this.addStoreLoader();
     },
 
     /**
      * Load store-based CSS.
-     *
-     * @todo Implement
      * 
      * @param number storeId The desired store ID.
      * 
      * @return RootdTinyMceExtension
      */
-    loadStoreCss: function(storeId) {
-        if ( (url = this.get('store_loader_url')) ) {
-            url += 'id/' + storeId;
+    loadStoreCss: function(storeId, editor) {
+        if (!storeId) {
+            return this;
         }
+
+        this.clearStoreCss(editor);
+
+        var instance = this;
+
+        if ( (url = this.get('store_loader_url')) ) {
+            url = url.replace(/\{\{id\}\}/, storeId);
+
+            new Ajax.Request(url, {
+                onSuccess: function(transport) {
+                    if (transport.responseText.isJSON()) {
+                        var assets = transport.responseText.evalJSON();
+
+                        for (var i = 0; i < assets.length; i++) {
+                            editor.dom.loadCSS(instance.tagCss(assets[i], 'enhanced_tinymce_store_css'));
+                        }
+                    }
+                }
+            });
+        }
+
+        return this;
     },
 
     /**
@@ -198,8 +252,10 @@ RootdTinyMceExtension.prototype = {
      * 
      * @return string
      */
-    tagCss: function(css) {
-        var tag = 'enhanced_tinymce';
+    tagCss: function(css, tag) {
+        if (!tag) {
+            tag = 'enhanced_tinymce';
+        }
 
         if (css.indexOf('?') > 0) {
             tag = '&' + tag;
