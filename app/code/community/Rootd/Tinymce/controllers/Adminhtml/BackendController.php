@@ -22,7 +22,7 @@ class Rootd_Tinymce_Adminhtml_BackendController
      */
     public function loadstoreassetsAction()
     {
-        $output = '';
+        $assets = array();
 
         if ( ($storeId = $this->getRequest()->getParam('id')) ) {
             $emulator           = Mage::getSingleton('core/app_emulation');
@@ -30,17 +30,35 @@ class Rootd_Tinymce_Adminhtml_BackendController
 
             $this->loadLayout();
 
-            // Simpler to render and parse the head than to re-write that block
-            $output = $this->getLayout()
-                ->getBlock('head')
-                ->getCssJsHtml();
+            $headBlock  = $this->getLayout()->getBlock('head');
+            $items      = $headBlock->getData('items');
+
+            foreach ($items as $key => $item) {
+                $type = end( ( explode('.', basename($item['name'])) ) );
+
+                if ( empty($item['if']) && strcasecmp($type, 'css') == 0 ) {
+                    $css[$key] = $item;
+                }
+            }
+
+            $headBlock->setData('items', $css);
+
+            // Closest we can get without a lot of re-writes is to parse the final HTML
+            $html = $headBlock->getCssJsHtml();
+
+            preg_match_all('/href="([^"]*)"/', $html, $matches);
+
+            $assets = end($matches);
 
             $emulator->stopEnvironmentEmulation($initialEnvironment);
         }
 
         $this->getResponse()
-            ->setBody($output)
+            ->setHeader('Content-Type', 'application/json')
+            ->setBody(Mage::helper('core')->jsonEncode($assets))
             ->sendResponse();
+
+        exit;
     }
 
 }
