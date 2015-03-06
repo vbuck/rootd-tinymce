@@ -12,7 +12,7 @@
 -->
 <config>
     <tabs>
-        <rootd translate="label" module="pulse">
+        <rootd translate="label" module="tinymce">
             <label>Rootd Extensions</label>
             <sort_order>250</sort_order>
         </rootd>
